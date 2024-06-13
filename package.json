@@ -1,0 +1,31 @@
+{
+  "name": "unity-audio-importer",
+  "version": "1.0.2",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "development": "NODE_ENV=development node index.js",
+    "test": "NODE_ENV=test node ./test/test.js",
+    "staging": "NODE_ENV=staging node index.js",
+    "docker:build": "docker build --platform $npm_package_config_docker_platform -t $npm_package_config_docker_username/$npm_package_config_docker_name:$npm_package_version -t $npm_package_config_docker_username/$npm_package_config_docker_name:latest .",
+    "docker:push": "docker push $npm_package_config_docker_username/$npm_package_config_docker_name:$npm_package_version && docker push $npm_package_config_docker_username/$npm_package_config_docker_name:latest",
+    "docker:run": "docker run -d --rm --name $npm_package_config_docker_name --env-file=.env -v ./files:/app/files $npm_package_config_docker_username/$npm_package_name:$npm_package_version",
+    "docker:remove": "docker stop $npm_package_config_docker_name && docker rm $npm_package_config_docker_name",
+    "docker:prune": "docker system prune -a"
+  },
+  "author": "Jeremy Worden",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "dotenv": "^16.4.5",
+    "envalid": "^8.0.0",
+    "winston": "^3.13.0",
+    "xml-js": "^1.6.11"
+  },
+  "config": {
+    "docker_username": "sieteunoseis",
+    "docker_platform": "linux/amd64",
+    "docker_name": "unity-audio-importer"
+  }
+}
